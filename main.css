@@ -15,7 +15,6 @@
 
 html, body, h1, ul, li, p {
   margin: 0;
-  padding: 0;
 }
 
 body {
@@ -43,13 +42,6 @@ h1 {
   border-bottom: 3px solid var(--accent);
   padding-bottom: 5px;
 }
-
-p {
-  color: #c0c5ce;
-  font-size: 1em; }
-
-code {
-  font-size: 1em; }
 
 ul {
   display: block;
@@ -108,4 +100,20 @@ input:focus, input:hover {
 
 input:hover {
   border: 3px solid var(--accent_h);
+}
+
+.searchbox #ttip {
+  display: none;
+  font-size: 0.9em;
+  font-weight: 100;
+  line-height: 25px;
+  color: var(--accent);
+  height: 50px;
+  width: 303px;
+  background-color: var(--bg);
+  opacity: 0.8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-158px, 90px);
 }

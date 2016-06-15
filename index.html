@@ -23,9 +23,12 @@
         <li><a href="https://youtube.com/">yt</a></li>
 		    <li><a href="https://reddit.com/">r</a></li>
       <br>
-      <p>
-        <input class="searchfield" placeholder="search... " type="text">
-      </p>
+      <div class="searchbox">
+        <input class="searchfield" placeholder="search / ? " type="text">
+        <div id="ttip">commands <br>
+          r/subreddit > 4/board > 8/board > a/board
+        </div>
+      </div>
     </main>
 
     <script>
@@ -45,6 +48,9 @@
             }
             else if (target.startsWith('r/')) {
               window.location.href = "https://reddit.com/r/" + target.replace('r/','').replace(' ','');
+            }
+            else if (target == '?') {
+              document.getElementById('ttip').style.display="block";
             }
             else {
               window.location.href = "https://duckduckgo.com/?q=" + target;
