@@ -1,0 +1,110 @@
+/* BROKEN RED
+   --main: #a66363;
+   --main_h: #c27171;
+                       */
+
+:root {
+  --main: #ad855c;
+  --main_h: #e2cbc0;
+  --accent: #8db8c9;
+  --accent_h: #e4eaf0;
+  --bg: #2f4357;
+  font-family: "Inconsolata", monospace;
+}
+
+html, body, h1, ul, li, p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg) url('./bg.jpg');
+  height: 100vh;
+  width: 100vw;
+ }
+
+main {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg);
+  padding: 50px 90px 50px 90px;
+  border: 9px solid var(--main);
+}
+
+
+h1 {
+  color: var(--main);
+  font-size: 3em;
+  font-weight: 100;
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 5px;
+}
+
+p {
+  color: #c0c5ce;
+  font-size: 1em; }
+
+code {
+  font-size: 1em; }
+
+ul {
+  display: block;
+  margin: 0 auto; }
+
+li {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1.5;
+  list-style: none;
+  margin: 0 20px 0 0; }
+
+.subh {
+  color: var(--main);
+  font-weight: bold;
+  margin-top: 10px;
+  text-decoration: none;
+  transition: .2s; }
+
+.subh:hover {
+  color: var(--main_h); }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: .2s; }
+
+a:hover {
+  color: var(--accent_h); }
+
+.subh a {
+  color: var(--main); }
+
+.subh a:hover {
+  color: var(--main_h); }
+
+input {
+  background: #456472;
+  color: #eff1f5;
+  border: none;
+  display: block;
+  font-size: .9em;
+  height: 30px;
+  margin: 15px auto;
+  padding: 5px 0 5px 13px;
+  width: 300px;
+  font-family: "Inconsolata", monospace;
+}
+
+input:focus, input:hover {
+  border: 3px solid var(--accent);
+  height: 24px;
+  width: 297px;
+  padding: 5px 0 5px 10px;
+}
+
+input:hover {
+  border: 3px solid var(--accent_h);
+}

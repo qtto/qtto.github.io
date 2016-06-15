@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>~</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+
+  <body>
+    <main>
+      <h1>Home</h1>
+      <p>
+      </p>
+      <li class="subh">/p/</li>
+        <li><a href="http://outlook.com/">mail</a></li>
+        <li><a href="https://blackboard.ru.nl">Bb</a></li>
+        <li><a href="https://kat.ph">kat</a></li>
+		    <li><a href="https://drive.google.com">gd</a></li>
+      <br>
+      <li class="subh">/e/</li>
+		    <li><a href="https://fb.com">fb</a></li>
+        <li><a href="https://play.google.com/music">gpm</a></li>
+        <li><a href="https://play.spotify.com/">sp</a></li>
+        <li><a href="https://youtube.com/">yt</a></li>
+		    <li><a href="https://reddit.com/">r</a></li>
+      <br>
+      <li class="subh"><a href="http://4chan.org">/4/</a></li>
+        <li><a href="https://4chan.org/a">a</a></li>
+        <li><a href="https://4chan.org/b">b</a></li>
+        <li><a href="https://4chan.org/g">g</a></li>
+        <li><a href="https://4chan.org/wg">wg</a></li>
+      <br>
+      <p>
+        <input class="searchfield" placeholder="search... " type="text">
+      </p>
+    </main>
+
+    <script>
+        document.getElementsByClassName('searchfield')[0].onkeypress = function (e) {
+          var target = document.getElementsByClassName('searchfield')[0].value;
+          if (!e) e = window.event;
+          var keyCode = e.keyCode || e.which;
+          if (keyCode == '13') {
+            if (target.startsWith('4/')) {
+              window.location.href = "https://4chan.org/" + target.replace('4/','').replace(' ','');
+            }
+            else if (target.startsWith('8/')) {
+              window.location.href = "https://8ch.net/" + target.replace('8/','').replace(' ','');
+            }
+            else if (target.startsWith('a/')) {
+              window.location.href = "https://atob.cc/b/" + target.replace('a/','').replace(' ','');
+            }
+            else if (target.startsWith('r/')) {
+              window.location.href = "https://reddit.com/r/" + target.replace('r/','').replace(' ','');
+            }
+            else {
+              window.location.href = "https://duckduckgo.com/?q=" + target;
+            }
+          }
+        };
+      </script>
+
+
+</body></html>
