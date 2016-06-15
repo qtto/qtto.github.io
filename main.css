@@ -18,7 +18,8 @@ html, body, h1, ul, li, p {
 }
 
 body {
-  background: var(--bg) url('./bg.jpg');
+  background: var(--bg);
+  background-image: url('./bg.jpg');
   height: 100vh;
   width: 100vw;
  }
