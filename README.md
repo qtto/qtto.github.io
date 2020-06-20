@@ -1,1 +1,2 @@
-Simple personal homepage.
+# lost
+lost.sx

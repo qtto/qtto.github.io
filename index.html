@@ -1,63 +1,17 @@
 <!DOCTYPE html>
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>~</title>
-    <link rel="stylesheet" href="main.css">
-  </head>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./css/index.css">
+        <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Orienta" rel="stylesheet"> 
+        <title> lost </title>
+    </head>
 
-  <body>
-    <main>
-      <h1>Home</h1>
-      <p>
-      </p>
-      <li class="subh">useful</li>
-        <li><a href="http://outlook.com/">mail</a></li>
-        <li><a href="https://blackboard.ru.nl">Bb</a></li>
-        <li><a href="https://1337x.to">1337x</a></li>
-		<li><a href="https://drive.google.com">gd</a></li>
-      <br>
-      <li class="subh">fun</li>
-		<li><a href="https://fb.com">fb</a></li>
-        <li><a href="https://play.spotify.com/">sp</a></li>
-        <li><a href="https://youtube.com/">yt</a></li>
-		<li><a href="https://reddit.com/">r</a></li>
-		<li><a href="https://masterani.me/">ma</a><a href="#">/</a><a href="https://moetube.net">mt</a></li>
-      <br>
-      <div class="searchbox">
-        <input class="searchfield" placeholder="search / ? " type="text">
-        <div id="ttip">commands <br>
-          r/subreddit > 4/board > 8/board > a/board
-        </div>
-      </div>
-    </main>
-
-    <script>
-        document.getElementsByClassName('searchfield')[0].onkeypress = function (e) {
-          var target = document.getElementsByClassName('searchfield')[0].value;
-          if (!e) e = window.event;
-          var keyCode = e.keyCode || e.which;
-          if (keyCode == '13') {
-            if (target.startsWith('4/')) {
-              window.location.href = "https://4chan.org/" + target.replace('4/','').replace(' ','');
-            }
-            else if (target.startsWith('8/')) {
-              window.location.href = "https://8ch.net/" + target.replace('8/','').replace(' ','');
-            }
-            else if (target.startsWith('a/')) {
-              window.location.href = "https://atob.cc/b/" + target.replace('a/','').replace(' ','');
-            }
-            else if (target.startsWith('r/')) {
-              window.location.href = "https://reddit.com/r/" + target.replace('r/','').replace(' ','');
-            }
-            else if (target == '?') {
-              document.getElementById('ttip').style.display="block";
-            }
-            else {
-              window.location.href = "https://duckduckgo.com/?q=" + target;
-            }
-          }
-        };
-      </script>
-
-
-</body></html>
+    <body class="index">
+        <div id="particles-js"></div>   
+        <h1 class="page-title" data-text="lost"> lost </h1>
+        <script type="text/javascript" src="/js/particles.min.js"></script>    
+        <script type="text/javascript" src="/js/run-particles.js"></script>      
+    </body>
+</html>

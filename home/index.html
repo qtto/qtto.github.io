@@ -1,0 +1,512 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro" rel="stylesheet"> 
+
+<title>∞</title>
+
+<script>
+  'use strict';
+  
+  var config = {
+    categories: [
+      { name: "Fun", commands: [
+        { key: 'yt', name: 'Youtube', url: 'https://www.youtube.com/feed/subscriptions', search: '/results?search_query=' },
+        { key: 'tw', name: 'Twitch', url: 'http://www.twitch.tv', search: '/browse' },
+        { key: 'ma', name: 'MasterAnime', url: 'http://www.masterani.me', search: '/anime?search=' },
+        { key: 'tm', name: 'twist.moe', url: 'https://twist.moe/', search: '' },
+      ] },
+      { name: "Listen", commands: [
+        { key: 'h', name: 'Hypem', url: 'http://hypem.com', search: '/search/' },
+        { key: 'n', name: 'Gnod', url: 'http://www.music-map.com/', search: '/' },
+        { key: 's', name: 'SoundCloud', url: 'https://soundcloud.com', search: '/search?q=' },
+        { key: 'l', name: 'Line Radio', url: 'https://linerad.io', search: '/#' },
+      ] },
+      { name: "Work", commands: [
+        { key: 'gh', name: 'GitHub', url: 'https://github.com', search: '/search?q=' },
+        { key: 'o', name: 'Outlook', url: 'https://outlook.live.com/owa', search: '/?path=/mail/search' },
+        { key: 'k', name: 'Keep', url: 'https://keep.google.com', search: '/#search/text=' },
+        { key: 'b', name: 'Brightspace', url: 'https://brightspace.ru.nl', search: '/' },
+      ] },
+      { name: "People", commands: [
+        { key: 'r', name: 'Reddit', url: 'https://www.reddit.com', search: '/search?q=' },
+        { key: 't', name: 'Twitter', url: 'https://twitter.com', search: '/search?q=' },
+        { key: 'fb', name: 'Facebook', url: 'https://www.fb.com', search: '/search/top/?init=quick&q=lees' },
+        { key: '4', name: '4chan', url: 'https://4chan.org', search: '/'}
+      ] },
+      { name: "Download", commands: [
+        { key: '1', name: '1337x', url: 'https://www.1337x.to/', search: '/search/f/' },
+        { key: 'i', name: 'idope', url: 'https://idope.se/', search: '/torrent-list/' },
+        { key: 'Z', name: 'Zooqle', url: 'https://zooqle.com', search: '/search?q=' },
+        { key: 'tpbb', name: 'TPB', url: 'https://ThePirateBay.org', search: '/search/' },
+      ] },
+    ],
+    // if none of the keys are matched, this is used for searching.
+    defaultSearch: 'https://duckduckgo.com/?q=',
+    // the delimiter between the key and your search query.
+    // e.g. to search GitHub for potatoes you'd type "g:potatoes".
+    searchDelimiter: ':',
+    // the delimiter between the key and a path.
+    // e.g. type "r/r/unixporn" to go to "reddit.com/r/unixporn".
+    pathDelimiter: '/',
+    // set to true to instantly redirect when a key is matched.
+    // put a space before any search queries to prevent unwanted redirects.
+    instantRedirect: false,
+    // open queries in a new tab.
+    newTab: true,
+    // Random Colors
+    colors: true,
+    // the delimiter between the hours and minutes in the clock.
+    clockDelimiter: ':',
+    // used for determining when to redirect directly to a url.
+    urlRegex: /^(?:(http|https)?:\/\/)?(?:[\w-]+\.)+([a-z]|[A-Z]|[0-9]){2,6}/i,
+    // if "urlRegex" matches but this doesn't, "http://" will be
+    // prepended to the beginning of the query before redirecting.
+    protocolRegex: /^[a-zA-Z]+:\/\//i
+  };
+
+  if (localStorage.getItem("colors") === null)
+    localStorage.setItem("colors", config.colors);
+  else
+    config.colors = localStorage.colors === "true";
+</script>
+
+
+<style type="text/css">
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background: #292A34;
+    color: #292A34;
+    font-family:  'Inter UI', 'Source Sans Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  main {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    background-color: #f6f7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.2);
+    transition: 0.2s all;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  time {
+    font-size: 6rem;
+    margin: 80px;
+    transition: 0.2s all;
+  }
+
+  .active {
+    box-shadow: 0 10px 20px rgba(10, 10, 15, 0.3);
+  }
+
+  .active time {
+    margin-bottom: 120px;
+    margin-top: 40px;
+    transition: 0.2s all;
+  }
+
+  input {
+    font-family:  'Inter UI', 'Source Sans Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    color: #292A34;
+    box-sizing: border-box;
+    border: 0;
+    outline: 0;
+    opacity: 0;
+    height: calc(120px + 8rem);
+    background: transparent;
+    border-radius: 8px;
+    transition: 0.2s all;
+    padding: 20px;
+    font-size: 4rem;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  input:focus {
+    height: 100%;
+    opacity: 1;
+    background: #f6f7eb;
+    font-size: 4rem;
+  }
+
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #overlay {
+    position: fixed;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.2s all;
+    background: #292A34;
+    visibility: hidden;
+    opacity: 0;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #overlay[data-toggled='true'] {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  #lists {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .category {
+    width: 225px;
+    margin: 20px 10px 0;
+  }
+
+  .category-name {
+    margin: 10px 0;
+    padding: 14px;
+    border-radius: 4px;
+    background: #f6f7eb;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(10, 10, 10, 0.2);
+  }
+
+  .command {
+    transition: all 200ms;
+    background: #33373a;
+  }
+
+  .command:hover .command-key {
+    background: rgba(230, 230, 230, 0.3);
+  }
+
+  .command:first-of-type {
+    border-radius: 4px 4px 0 0;
+  }
+
+  .command:last-of-type {
+    border-radius: 0 0 4px 4px;
+  }
+
+  .command a {
+    display: block;
+    color: #f6f7eb;
+    font-size: 1rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-decoration: none;
+    padding: 8px;
+  }
+
+  .command-key {
+    display: block;
+    margin-right: 10px;
+    padding: 0 6px;
+    width: 30px;
+    float: left;
+    background: rgba(230, 230, 230, 0.1);
+    font-family: 'Source Sans Pro', monospace;
+    text-align: center;
+    border-radius: 2px;
+    transition: 0.2s all;
+  }
+
+  @media (max-width: 740px) {
+    #overlay {
+      align-items: flex-start;
+    }
+  }
+</style>
+
+
+<main>
+  <time id="clock"></time>
+  <form id="search-form" autocomplete="off">
+    <input id="search-input" type="text">
+  </form>
+</main>
+
+<aside id="overlay">
+  <ul id="lists"></ul>
+</aside>
+
+
+<script>
+  // Create a jquery-like node selector
+  const $ = element => {
+    el = document.querySelectorAll(element);
+    if (el.length > 1) 
+      return el;
+    return el[0];
+  }
+
+
+  // Clock
+  const Clock = (() => {
+    const clock = $('#clock');
+    const pad = num => ('0' + num.toString()).slice(-2);
+
+    const setTime = () => {
+      let date = new Date();
+      let hours = pad(date.getHours());
+      let minutes = pad(date.getMinutes());
+      clock.innerHTML = hours + config.clockDelimiter + minutes;
+    }
+
+    setTime();
+    setInterval(setTime, 1000);
+  })();
+
+
+  // Help (list commands)
+  const Help = (() => {
+    const overlay = $('#overlay');
+    const lists = $('#lists');
+
+    config.categories.forEach(category => {
+      let commandItems = '';
+      category.commands.forEach(command => {
+        commandItems += (
+          '<li class="command">' +
+          '<a href="' + command.url + '">' +
+          '<span class="command-key">' + command.key + '</span>' +
+          '<span class="command-name">' + command.name + '</span>' +
+          '</a>' +
+          '</li>'
+        );
+      });
+      lists.insertAdjacentHTML(
+        'beforeend',
+        '<li class="category">' +
+        '<h2 class="category-name">' + category.name + '</h2>' +
+        '<ul>' + commandItems + '</ul>' +
+        '</li>'
+      );
+    });
+
+    return {
+      toggle: show => {
+        var toggle = typeof show !== 'undefined' ? show :
+          overlay.getAttribute('data-toggled') !== 'true';
+        overlay.setAttribute('data-toggled', toggle);
+      }
+    };
+  })();
+
+
+  // Form
+  const Form = (() => {
+    const searchInput = $('#search-input');
+    const searchForm = $('#search-form');
+
+    const execute = (query, redirect) => {
+      searchInput.value = '';
+      if (config.newTab) window.open(redirect, '_blank');
+      else window.location.href = redirect;
+    }
+
+    const keypress = event => {
+      let char = String.fromCharCode(event.which);
+      let key = event.keyCode;
+      let keydown = event.type ===  "keydown";
+      let activeInput = document.activeElement.nodeName === 'INPUT'; // check if input is in focus
+      let overlay = $('#overlay').getAttribute('data-toggled') == 'true'; // check if overlay is toggled
+      let modified = event.ctrlKey || event.metaKey || event.altKey; // check kif ctrl/alt/cmd is held
+
+      if (key == 27) {
+        if (activeInput && !overlay) {
+          searchInput.blur();
+          searchInput.value = "";
+        }
+        else if (!activeInput && !overlay && config.colors) setColors();
+        else if (overlay) Help.toggle();
+      }
+      
+      // Rebind this if you want. Changes background to an image instead
+      if (key == 107 ) {
+        config.colors = localStorage.colors = !config.colors;
+        setColors();
+      }
+
+      if (!activeInput && char.match(/(\w|\s)/) && !keydown && !modified) {
+        event.preventDefault();
+        searchInput.value += char;
+        searchInput.focus();
+      }
+
+      if (config.instantRedirect) {
+        config.categories.forEach(category => {
+          category.commands.forEach(command => {
+            let query = searchInput.value + char;
+            if (command.key === query) {
+              event.preventDefault();
+              execute(query, command.url);
+            }
+          });
+        });
+      }
+    };
+
+    const submit = event => {
+      if (event) event.preventDefault();
+      const q = searchInput.value.trim();
+      if (!q) {
+        Help.toggle();
+        return false;
+      }
+      const qIsUrl = q.match(config.urlRegex);
+      const qHasProtocol = q.match(config.protocolRegex);
+
+      let qSplitSearch = q.split(config.searchDelimiter);
+      let qSplitPath = q.split(config.pathDelimiter);
+      let redirect = '';
+      let breakLoop = false;
+
+      if (qIsUrl) redirect = qHasProtocol ? q : 'https://' + q;
+      else redirect = config.defaultSearch + encodeURIComponent(q);
+
+      config.categories.forEach(category => {
+        category.commands.forEach(command => {
+          let isSearch = qSplitSearch[0] === command.key;
+          let isPath = qSplitPath[0] === command.key;
+          if (isSearch || isPath) {
+            if (qSplitSearch[1] && command.search) {
+              qSplitSearch.shift();
+              let search = encodeURIComponent(
+                qSplitSearch.join(config.searchDelimiter).trim()
+              );
+              redirect = command.url + command.search + search;
+            } else if (qSplitPath[1]) {
+              qSplitPath.shift();
+              let path = qSplitPath.join(config.pathDelimiter).trim();
+              redirect = command.url + '/' + path;
+            } else {
+              redirect = command.url;
+            }
+            breakLoop = true;
+            return;
+          }
+        });
+        if (breakLoop) return;
+      });
+      execute(q, redirect);
+    }
+
+    // If you're using Edge, use 'keydown' as event listener instead
+    ['keydown', 'keypress'].forEach((e) => document.addEventListener(e, keypress));
+    
+    // enter press on form
+    searchForm.addEventListener('submit', submit, false); 
+    
+    // open search when main is clicked
+    $('main').addEventListener('click', () => searchInput.focus());
+
+    return {
+      submitWithThis: () => {
+        searchInput.value = this.value;
+        submit();
+      }
+    };
+  })();
+
+
+  // Sets colors
+  const setColors = () => {
+    // Possible BG colors
+    const colors = [
+      '#3f88c5', '#f78764',
+      '#989fce', '#f26157',
+      '#d295bf', '#fdca40',
+      '#26a96c', '#cf995f',
+      '#bad1cd',
+      '#5762d5', '#3d518c',
+      '#acbed8', '#ff6978',
+    ];
+
+    const body = $('body');
+    const main = $('main');
+    const input = $('#search-input');
+    const overlay = $('#overlay');
+    const heading = $('.category-name');
+    const command = $('.command');
+    
+    // Input box
+    input.addEventListener("focus", ()=> main.className = "active");
+    input.addEventListener("blur",  ()=> main.className = "");
+
+    // Get a lighter / darker shade of a given color
+    const shade = (color, percent) => {
+      let R = parseInt(color.substring(1, 3), 16);
+      let G = parseInt(color.substring(3, 5), 16);
+      let B = parseInt(color.substring(5, 7), 16);
+
+      R = parseInt(R * (100 + percent) / 100);
+      G = parseInt(G * (100 + percent) / 100);
+      B = parseInt(B * (100 + percent) / 100);
+
+      R = (R < 255) ? R : 255;
+      G = (G < 255) ? G : 255;
+      B = (B < 255) ? B : 255;
+
+      let RR = ((R.toString(16).length == 1) ? "0" + R.toString(16) : R.toString(16));
+      let GG = ((G.toString(16).length == 1) ? "0" + G.toString(16) : G.toString(16));
+      let BB = ((B.toString(16).length == 1) ? "0" + B.toString(16) : B.toString(16));
+
+      return "#" + RR + GG + BB;
+    }
+
+    const setProps = col => {
+      if (!col) body.style.backgroundImage = "url('./bg/space.png')";
+      else {
+        const choice = {};
+        choice.main = colors[Math.floor(Math.random() * colors.length)];
+        choice.dark = shade(choice.main, -10);
+        choice.darker = shade(choice.main, -60);
+        choice.light = shade(choice.main, 20);
+
+        // Set item colors
+        body.style.background = choice.main;
+        body.style.color = choice.darker;
+        input.style.color = choice.darker;
+        overlay.style.backgroundColor = choice.dark;
+
+        // Help headings
+        heading.forEach(h => {h.style.backgroundColor = choice.light});
+        command.forEach(c => {c.style.backgroundColor = choice.darker});
+      }
+    }
+
+    setProps(config.colors);
+  };
+
+  
+  // Set colors on load
+  window.onload = setColors();
+</script>
